@@ -1,7 +1,29 @@
 <?php
+    require 'Cart.php';
+    require 'Product.php';
+    session_start();
+
+    
+
+    $product = [
+        1 => ['id' => 1, 'name' => 'geladeira', 'price' => 1000, 'quantity' => 1],
+        2 => ['id' => 2, 'name' => 'mouse', 'price' => 2000, 'quantity' => 1],
+        3 => ['id' => 3, 'name' => 'teclado', 'price' => 100, 'quantity' => 1],
+        4 => ['id' => 4, 'name' => 'monitor', 'price' => 50, 'quantity' => 1],
+    ];
     if(isset($_GET['id'])) {
         $id = strip_tags($_GET['id']);
-        var_dump($id);
+        $productInfo = $product[$id];
+        $product = new Product;
+        $product->setId($productInfo['id']);
+        $product->setName($productInfo['name']);
+        $product->setPrice($productInfo['price']);
+        $product->setQuantity($productInfo['quantity']);
+
+        $cart = new Cart;
+        $cart->add($product);
+
+        var_dump($_SESSION['cart'] ?? []);
     }
 ?>
 
@@ -13,6 +35,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="./mycart.php">Go to cart</a>
     <ul>
         <li>Geladeira<a href="?id=1">Add</a> R$ 1000</li>
         <li>Mouse<a href="?id=2">Add</a> R$ 2000</li>

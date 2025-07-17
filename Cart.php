@@ -5,10 +5,11 @@ class Cart
     public function add(Product $product)
     {
       $inCart = false;
-      if(count($this->getCart()['product']) > 0) {
-        foreach ($this->getCart()['product'] as $productInCart) {
+      $this->setTotal($product);
+      if(count($this->getCart()) > 0) {
+        foreach ($this->getCart() as $productInCart) {
             if ($productInCart->getId() === $product->getId()) {
-                $quantity = $productInCart->getQuanity() + $product->getQuantity();
+                $quantity = $productInCart->getQuantity() + $product->getQuantity();
                 $productInCart->setQuantity($quantity);
                 $inCart = true;
                 break;
@@ -23,17 +24,34 @@ class Cart
     }
 
     private function setProductInCart($product) {
-        $this->getCart()['product'][] = $product;
+        $_SESSION['cart']['product'][] = $product;
 
     }
 
-    public function remove()
-    {
+    private function setTotal(Product $product) {
+        $_SESSION['cart']['total'] += $product->getPrice() * $product->getQuantity();
+    }
 
+    public function remove(int $id)
+    {
+        if(isset($_SESSION['cart']['product']))
+        {
+            foreach($this->getCart() as $index => $product) {
+                if($product->getId() === $id)
+                {
+                    unset($_SESSION['cart']['product'][$index]);
+                    $_SESSION['cart']['total'] -= $product->getPrice() * $product->getQuantity();
+                }
+            }
+        }
     }
 
     public function getCart() {
-        return $_SESSION['cart'] ?? [];
+        return $_SESSION['cart']['product'] ?? [];
+    }
+
+    public function getTotal() {
+        return $_SESSION['cart']['total'] ?? 0;
     }
 }
 ?>
