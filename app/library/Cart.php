@@ -1,9 +1,16 @@
 <?php 
     
+namespace app\library;
+
 class Cart 
 {
     public function add(Product $product)
     {
+
+        if(!isset($_SESSION['cart'])){
+            $_SESSION['cart'] = [];
+        }
+
       $inCart = false;
       $this->setTotal($product);
       if(count($this->getCart()) > 0) {
@@ -24,11 +31,16 @@ class Cart
     }
 
     private function setProductInCart($product) {
+        if(!isset($_SESSION['cart']['product'])) {
+            $_SESSION['cart']['product'] = [];
+        }
         $_SESSION['cart']['product'][] = $product;
-
     }
 
     private function setTotal(Product $product) {
+        if(!isset($_SESSION['cart']['total'])) {
+            $_SESSION['cart']['total'] = 0;
+        }
         $_SESSION['cart']['total'] += $product->getPrice() * $product->getQuantity();
     }
 

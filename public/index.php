@@ -1,6 +1,10 @@
 <?php
-    require 'Cart.php';
-    require 'Product.php';
+
+    use app\library\Cart;
+    use app\library\Product;
+    
+    require '../vendor/autoload.php';
+
     session_start();
 
     
@@ -11,19 +15,19 @@
         3 => ['id' => 3, 'name' => 'teclado', 'price' => 100, 'quantity' => 1],
         4 => ['id' => 4, 'name' => 'monitor', 'price' => 50, 'quantity' => 1],
     ];
+
     if(isset($_GET['id'])) {
         $id = strip_tags($_GET['id']);
         $productInfo = $product[$id];
-        $product = new Product;
-        $product->setId($productInfo['id']);
-        $product->setName($productInfo['name']);
-        $product->setPrice($productInfo['price']);
-        $product->setQuantity($productInfo['quantity']);
+        $productObj = new Product;
+        $productObj->setId($productInfo['id']);
+        $productObj->setName($productInfo['name']);
+        $productObj->setPrice($productInfo['price']);
+        $productObj->setQuantity($productInfo['quantity']);
 
         $cart = new Cart;
-        $cart->add($product);
+        $cart->add($productObj);
 
-        var_dump($_SESSION['cart'] ?? []);
     }
 ?>
 
@@ -36,11 +40,15 @@
 </head>
 <body>
     <a href="./mycart.php">Go to cart</a>
-    <ul>
-        <li>Geladeira<a href="?id=1">Add</a> R$ 1000</li>
-        <li>Mouse<a href="?id=2">Add</a> R$ 2000</li>
-        <li>Teclado<a href="?id=3">Add</a> R$ 100</li>
-        <li>Monitor<a href="?id=4">Add</a> R$ 50</li>
-    </ul>
+
+        <ul>
+            <?php foreach($product as $item): ?>
+                <li><?php echo ucfirst($item['name'])?> |
+                    <a href=" ?id=<?php echo $item['id'] ?> ">add</a> |
+                    R$ <?php echo number_format($item['price'],2,',','.') ?>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    
 </body>
 </html>

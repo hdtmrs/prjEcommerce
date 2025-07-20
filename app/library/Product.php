@@ -1,5 +1,7 @@
 <?php
 
+namespace app\library;
+
 class Product 
 {
     private int $id;

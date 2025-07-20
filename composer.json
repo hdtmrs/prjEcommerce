@@ -1,0 +1,16 @@
+{
+    "name": "viviane/prj-ecommecer",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hdtmrs"
+        }
+    ],
+    "require": {
+        "stripe/stripe-php": "^17.4"
+    }
+}

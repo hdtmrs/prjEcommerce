@@ -1,6 +1,9 @@
 <?php 
-require 'Product.php';
-require 'Cart.php';
+
+use app\library\Product;
+use app\library\Cart;
+
+require '../vendor/autoload.php';
 
 session_start();
 
@@ -40,5 +43,9 @@ if(isset($_GET['id']))
         <?php endforeach ?>
         <li> R$<?php echo number_format($cart->getTotal(),2,',','.');?></li>
     </ul>
+
+    <hr>
+
+    <a href="checkout.php">Checkout</a>
 </body>
 </html>
