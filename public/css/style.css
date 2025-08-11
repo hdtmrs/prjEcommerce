@@ -66,3 +66,6 @@ body{
   .details{ grid-template-columns: 1fr; }
   .form-card{ grid-template-columns: 1fr; }
 }
+
+.alert{ background:rgba(255,255,255,0.03); border-left:4px solid rgba(255,90,107,0.9); padding:0.75rem; border-radius:8px; color:var(--text); margin-bottom:1rem;}
+.alert.success{ border-left-color: #6ee7b7; }
