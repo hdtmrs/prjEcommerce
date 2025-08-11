@@ -8,30 +8,27 @@ return new class extends Migration {
     {
         Schema::create('tbUsuario', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nome');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('senha');
 
-            // Campos recomendados
-            $table->string('phone')->nullable();
+            $table->string('telefone')->nullable();
             $table->string('cpf')->unique();
-            $table->enum('type_account', ['buyer','seller','both'])->default('buyer');
-            $table->string('profile_image')->nullable();
+            $table->enum('tipoConta', ['buyer','seller','both'])->default('buyer');
+            $table->string('imagemPerfil')->nullable();
 
-            // Endereço (opcional)
-            $table->string('street')->nullable();
-            $table->string('number')->nullable();
+            $table->string('rua')->nullable();
+            $table->string('numero')->nullable();
             $table->string('neighborhood')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
+            $table->string('cidade')->nullable();
+            $table->string('estado')->nullable();
             $table->string('cep')->nullable();
 
-            // Outros opcionais
-            $table->date('birthdate')->nullable();
+            $table->date('aniversario')->nullable();
             $table->string('cnh')->nullable();
             $table->string('cnpj')->nullable();
-            $table->string('company_name')->nullable();
+            $table->string('nomeCompania')->nullable();
             $table->text('bio')->nullable();
 
             $table->rememberToken();

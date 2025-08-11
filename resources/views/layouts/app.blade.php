@@ -12,7 +12,9 @@
       <a class="brand" href="{{ route('cars.index') }}">Auto<span>Mercado</span></a>
       <nav>
         <a href="{{ route('cars.create') }}" class="btn">Anunciar carro</a>
+        <a href="{{ route('login') }}" class="btn">Fazer login</a>
       </nav>
+
     </div>
   </header>
 

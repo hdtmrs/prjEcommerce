@@ -1,5 +1,5 @@
 <?php
-// app/Models/User.php
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,34 +10,36 @@ class Usuario extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = "tbUsuario";
+
     protected $fillable = [
-        'name',
+        'nome',
         'email',
-        'password',
-        'phone',
+        'senha',
+        'telefone',
         'cpf',
-        'type_account',
-        'profile_image',
-        'street',
-        'number',
+        'tipoConta',
+        'imagemPerfil',
+        'rua',
+        'numero',
         'neighborhood',
-        'city',
-        'state',
+        'cidade',
+        'estado',
         'cep',
-        'birthdate',
+        'aniversario',
         'cnh',
         'cnpj',
-        'company_name',
+        'nomeCompania',
         'bio'
     ];
 
     protected $hidden = [
-        'password',
+        'senha',
         'remember_token',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'birthdate' => 'date',
+        'aniversario' => 'date',
     ];
 }

@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-class AuthController extends Controller
+class UsuarioController extends Controller
 {
     public function showRegisterForm()
     {
@@ -17,40 +17,43 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => ['required','email','max:255', Rule::unique('users','email')],
-            'password' => 'required|string|min:8|confirmed',
-            'phone' => 'required|string|max:20',
-            'cpf' => ['required','string','max:20', Rule::unique('users','cpf')],
-            'type_account' => 'required|in:buyer,seller,both',
+            'nome' => 'required|string|max:255',
+            'email' => ['required','email','max:255', Rule::unique('tbUsuario','email')],
+            'senha' => 'required|string|min:8|',
+            'senhaConfirmada' => 'same:senha',
+            'telefone' => 'required|string|max:20',
+            'cpf' => ['required','string','max:20', Rule::unique('tbUsuario','cpf')],
+            'tipoConta' => 'required|in:buyer,seller,both',
 
-            // opcionais
-            'profile_image' => 'nullable|image|max:5120',
-            'street' => 'nullable|string|max:255',
-            'number' => 'nullable|string|max:30',
+            
+            'imagemPerfil' => 'nullable|image|max:5120',
+            'rua' => 'nullable|string|max:255',
+            'numero' => 'nullable|string|max:30',
             'neighborhood' => 'nullable|string|max:255',
-            'city' => 'nullable|string|max:255',
-            'state' => 'nullable|string|max:100',
+            'cidade' => 'nullable|string|max:255',
+            'stado' => 'nullable|string|max:100',
             'cep' => 'nullable|string|max:20',
-            'birthdate' => 'nullable|date',
+            'aniversario' => 'nullable|date',
             'cnh' => 'nullable|string|max:50',
             'cnpj' => 'nullable|string|max:50',
-            'company_name' => 'nullable|string|max:255',
+            'nomeCompania' => 'nullable|string|max:255',
             'bio' => 'nullable|string|max:1000',
         ]);
 
-        if ($request->hasFile('profile_image')) {
-            $data['profile_image'] = $request->file('profile_image')->store('profiles','public');
+        if ($request->hasFile('imagemPerfil')) {
+            $data['imagemPerfil'] = $request->file('imagemPerfil')->store('profiles','public');
         }
 
-        $data['password'] = Hash::make($data['password']);
+        $data['senha'] = Hash::make($data['senha']);
 
-        $user = User::create($data);
+        $user = Usuario::create($data);
 
         Auth::login($user);
 
         return redirect()->route('cars.index')->with('success','Conta criada! Bem-vindo(a).');
     }
+
+
 
     public function showLoginForm()
     {
@@ -61,7 +64,7 @@ class AuthController extends Controller
     {
         $creds = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string',
+            'senha' => 'required|string',
         ]);
 
         $remember = $request->boolean('remember');
@@ -75,6 +78,8 @@ class AuthController extends Controller
             'email' => 'Credenciais inválidas.',
         ])->onlyInput('email');
     }
+
+
 
     public function logout(Request $request)
     {

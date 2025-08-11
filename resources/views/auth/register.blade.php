@@ -16,7 +16,7 @@
   @csrf
 
   <label>Nome completo
-    <input name="name" value="{{ old('name') }}" required>
+    <input name="nome" value="{{ old('nome') }}" required>
   </label>
 
   <label>E-mail
@@ -24,15 +24,15 @@
   </label>
 
   <label>Senha
-    <input name="password" type="password" required>
+    <input name="senha" type="password" required>
   </label>
 
   <label>Confirmar senha
-    <input name="password_confirmation" type="password" required>
+    <input name="senhaConfirmada" type="password" required>
   </label>
 
   <label>Telefone (celular)
-    <input name="phone" value="{{ old('phone') }}" required>
+    <input name="telefone" value="{{ old('telefone') }}" required>
   </label>
 
   <label>CPF
@@ -40,15 +40,15 @@
   </label>
 
   <label>Tipo de conta
-    <select name="type_account" required>
-      <option value="buyer" {{ old('type_account')=='buyer' ? 'selected':'' }}>Comprador</option>
-      <option value="seller" {{ old('type_account')=='seller' ? 'selected':'' }}>Vendedor</option>
-      <option value="both" {{ old('type_account')=='both' ? 'selected':'' }}>Ambos</option>
+    <select name="tipoConta" required>
+      <option value="buyer" {{ old('tipoConta')=='buyer' ? 'selected':'' }}>Comprador</option>
+      <option value="seller" {{ old('tipoConta')=='seller' ? 'selected':'' }}>Vendedor</option>
+      <option value="both" {{ old('tipoConta')=='both' ? 'selected':'' }}>Ambos</option>
     </select>
   </label>
 
   <label>Foto de perfil (opcional)
-    <input type="file" name="profile_image">
+    <input type="file" name="imagemPerfil">
   </label>
 
   <hr style="grid-column:span 2;border:none;height:1px;background:rgba(255,255,255,0.03);margin:8px 0">
@@ -56,11 +56,11 @@
   <p style="grid-column:span 2;color:var(--muted)">Dados opcionais (preencha depois no perfil se preferir)</p>
 
   <label>Rua
-    <input name="street" value="{{ old('street') }}">
+    <input name="rua" value="{{ old('rua') }}">
   </label>
 
   <label>Número
-    <input name="number" value="{{ old('number') }}">
+    <input name="numero" value="{{ old('numero') }}">
   </label>
 
   <label>Bairro
@@ -68,11 +68,11 @@
   </label>
 
   <label>Cidade
-    <input name="city" value="{{ old('city') }}">
+    <input name="cidade" value="{{ old('cidade') }}">
   </label>
 
   <label>Estado
-    <input name="state" value="{{ old('state') }}">
+    <input name="stado" value="{{ old('estado') }}">
   </label>
 
   <label>CEP
@@ -80,7 +80,7 @@
   </label>
 
   <label>Data de nascimento
-    <input name="birthdate" type="date" value="{{ old('birthdate') }}">
+    <input name="aniversario" type="date" value="{{ old('aniversario') }}">
   </label>
 
   <label>CNH (opcional)
@@ -92,7 +92,7 @@
   </label>
 
   <label>Nome da empresa (opcional)
-    <input name="company_name" value="{{ old('company_name') }}">
+    <input name="nomeCompania" value="{{ old('nomeCompania') }}">
   </label>
 
   <label style="grid-column:span 2">Biografia / apresentação (opcional)

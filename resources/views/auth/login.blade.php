@@ -20,7 +20,7 @@
   </label>
 
   <label>Senha
-    <input name="password" type="password" required>
+    <input name="senha" type="password" required>
   </label>
 
   <label style="display:flex;align-items:center;gap:.5rem">
