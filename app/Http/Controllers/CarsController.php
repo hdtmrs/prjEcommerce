@@ -8,6 +8,13 @@ use App\Models\Cars;
 
 class CarsController extends Controller
 {
+
+
+    public function show(Cars $car)
+    {
+        return view('cars.show', compact('car'));
+    }
+
     public function index(Request $request)
     {
         $query = Cars::query();
@@ -15,19 +22,22 @@ class CarsController extends Controller
         if ($request->filled('search')) {
             $s = $request->search;
             $query->where(function($q) use ($s) {
-                $q->where('title', 'like', "%{$s}%")
-                  ->orWhere('brand', 'like', "%{$s}%")
-                  ->orWhere('model', 'like', "%{$s}%");
+                $q->where('titulo', 'like', "%{$s}%")
+                  ->orWhere('marca', 'like', "%{$s}%")
+                  ->orWhere('modelo', 'like', "%{$s}%");
             });
         }
 
-        if ($request->filled('condition')) {
-            $query->where('condition', $request->condition);
+        if ($request->filled('condicao')) {
+            $query->where('condicao', $request->condition);
         }
 
         $cars = $query->orderBy('created_at','desc')->paginate(9)->withQueryString();
         return view('cars.index', compact('cars'));
     }
+
+
+
 
     public function create()
     {
@@ -37,30 +47,27 @@ class CarsController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'brand' => 'required|string|max:100',
-            'model' => 'required|string|max:100',
-            'year' => 'required|integer|min:1900|max:'.(date('Y')+1),
-            'condition' => 'required|in:new,used',
-            'mileage' => 'nullable|integer',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|max:5120', // 5MB
+            'titulo' => 'required|string|max:255',
+            'marca' => 'required|string|max:100',
+            'modelo' => 'required|string|max:100',
+            'ano' => 'required|integer|min:1900|max:'.(date('Y')+1),
+            'condicao' => 'required|in:new,used',
+            'quilometragem' => 'nullable|integer',
+            'preco' => 'required|numeric|min:0',
+            'descricao' => 'nullable|string',
+            'imagem' => 'nullable|image|max:5120', // 5MB
         ]);
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('cars','public');
+        if ($request->hasFile('imagem')) {
+            $data['imagem'] = $request->file('imagem')->store('tbCars','public');
         }
 
-        Car::create($data);
+        Cars::create($data);
 
         return redirect()->route('cars.index')->with('success','Carro cadastrado com sucesso!');
     }
 
-    public function show(Cars $car)
-    {
-        return view('cars.show', compact('car'));
-    }
+
 
     public function edit(Cars $car)
     {
@@ -70,20 +77,20 @@ class CarsController extends Controller
     public function update(Request $request, Cars $car)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'brand' => 'required|string|max:100',
-            'model' => 'required|string|max:100',
-            'year' => 'required|integer|min:1900|max:'.(date('Y')+1),
-            'condition' => 'required|in:new,used',
-            'mileage' => 'nullable|integer',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|max:5120',
+            'titulo' => 'required|string|max:255',
+            'marca' => 'required|string|max:100',
+            'modelo' => 'required|string|max:100',
+            'ano' => 'required|integer|min:1900|max:'.(date('Y')+1),
+            'condicao' => 'required|in:new,used',
+            'quilometragem' => 'nullable|integer',
+            'preco' => 'required|numeric|min:0',
+            'descricao' => 'nullable|string',
+            'imagem' => 'nullable|image|max:5120',
         ]);
 
-        if ($request->hasFile('image')) {
-            // opcional: remover imagem antiga
-            $data['image'] = $request->file('image')->store('cars','public');
+        if ($request->hasFile('imagem')) {
+            
+            $data['imagem'] = $request->file('imagem')->store('tbCars','public');
         }
 
         $car->update($data);
@@ -91,9 +98,12 @@ class CarsController extends Controller
         return redirect()->route('cars.show', $car)->with('success','Carro atualizado!');
     }
 
+
+
+
     public function destroy(Cars $car)
     {
-        // opcional: apagar imagem do storage
+        
         $car->delete();
         return redirect()->route('cars.index')->with('success','Carro removido');
     }

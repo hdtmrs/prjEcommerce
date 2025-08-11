@@ -6,20 +6,20 @@
   @csrf
   @if(isset($car)) @method('PUT') @endif
 
-  <label>Título <input name="title" value="{{ old('title', $car->title ?? '') }}"></label>
-  <label>Marca <input name="brand" value="{{ old('brand', $car->brand ?? '') }}"></label>
-  <label>Modelo <input name="model" value="{{ old('model', $car->model ?? '') }}"></label>
-  <label>Ano <input name="year" type="number" value="{{ old('year', $car->year ?? '') }}"></label>
+  <label>Título <input name="titulo" value="{{ old('titulo', $car->titulo ?? '') }}"></label>
+  <label>Marca <input name="marca" value="{{ old('marca', $car->marca ?? '') }}"></label>
+  <label>Modelo <input name="modelo" value="{{ old('modelo', $car->modelo ?? '') }}"></label>
+  <label>Ano <input name="ano" type="number" value="{{ old('ano', $car->ano ?? '') }}"></label>
   <label>Condição
-    <select name="condition">
-      <option value="used" {{ old('condition', $car->condition ?? '') == 'used' ? 'selected':'' }}>Usado</option>
-      <option value="new" {{ old('condition', $car->condition ?? '') == 'new' ? 'selected':'' }}>Novo</option>
+    <select name="condicao">
+      <option value="used" {{ old('condicao', $car->condicao ?? '') == 'used' ? 'selected':'' }}>Usado</option>
+      <option value="new" {{ old('condicao', $car->condicao ?? '') == 'new' ? 'selected':'' }}>Novo</option>
     </select>
   </label>
-  <label>Quilometragem <input name="mileage" value="{{ old('mileage', $car->mileage ?? '') }}"></label>
-  <label>Preço <input name="price" value="{{ old('price', $car->price ?? '') }}"></label>
-  <label>Imagem <input type="file" name="image"></label>
-  <label>Descrição <textarea name="description">{{ old('description', $car->description ?? '') }}</textarea></label>
+  <label>Quilometragem <input name="quilometragem" value="{{ old('quilometragem', $car->quilometragem ?? '') }}"></label>
+  <label>Preço <input name="preco" value="{{ old('preco', $car->preco ?? '') }}"></label>
+  <label>Imagem <input type="file" name="imagem"></label>
+  <label>Descrição <textarea name="descricao">{{ old('descricao', $car->descricao ?? '') }}</textarea></label>
 
   <button class="btn">Salvar anúncio</button>
 </form>

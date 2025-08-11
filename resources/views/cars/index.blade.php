@@ -10,8 +10,8 @@
     <input name="search" placeholder="Ex: Civic, Corolla, Gol..." value="{{ request('search') }}">
     <select name="condition">
       <option value="">Todos</option>
-      <option value="new" {{ request('condition')=='new' ? 'selected':'' }}>Novo</option>
-      <option value="used" {{ request('condition')=='used' ? 'selected':'' }}>Usado</option>
+      <option value="new" {{ request('condicao')=='new' ? 'selected':'' }}>Novo</option>
+      <option value="used" {{ request('condicao')=='used' ? 'selected':'' }}>Usado</option>
     </select>
     <button>Pesquisar</button>
   </form>
@@ -20,11 +20,11 @@
 <section class="grid">
   @forelse($cars as $car)
     <article class="card">
-      <div class="thumb" style="background-image:url('{{ $car->image ? asset('storage/'.$car->image) : asset('images/placeholder-car.jpg') }}')"></div>
+      <div class="thumb" style="background-image:url('{{ $car->imagem ? asset('storage/'.$car->imagem) : asset('images/placeholder-car.jpg') }}')"></div>
       <div class="card-body">
         <h3>{{ $car->title }}</h3>
-        <p class="meta">{{ $car->brand }} • {{ $car->model }} • {{ $car->year }} • {{ $car->condition == 'new' ? 'Novo' : 'Usado' }}</p>
-        <p class="price">R$ {{ number_format($car->price,2,',','.') }}</p>
+        <p class="meta">{{ $car->marca }} • {{ $car->modelo }} • {{ $car->ano }} • {{ $car->condicao == 'new' ? 'Novo' : 'Usado' }}</p>
+        <p class="price">R$ {{ number_format($car->preco,2,',','.') }}</p>
         <a href="{{ route('cars.show', $car) }}" class="btn small">ver anúncio</a>
       </div>
     </article>

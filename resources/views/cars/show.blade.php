@@ -4,19 +4,19 @@
 @section('content')
 <article class="details">
   <div class="gallery">
-    <img src="{{ $car->image ? asset('storage/'.$car->image) : asset('images/placeholder-car.jpg') }}" alt="{{ $car->title }}">
+    <img src="{{ $car->imagem ? asset('storage/'.$car->imagem) : asset('images/placeholder-car.jpg') }}" alt="{{ $car->titulo }}">
   </div>
   <div class="info">
-    <h2>{{ $car->title }}</h2>
-    <p class="price">R$ {{ number_format($car->price,2,',','.') }}</p>
+    <h2>{{ $car->titulo}}</h2>
+    <p class="price">R$ {{ number_format($car->preco,2,',','.') }}</p>
     <ul class="specs">
-      <li><strong>Marca:</strong> {{ $car->brand }}</li>
-      <li><strong>Modelo:</strong> {{ $car->model }}</li>
-      <li><strong>Ano:</strong> {{ $car->year }}</li>
-      <li><strong>Quilometragem:</strong> {{ $car->mileage ?? '—' }} km</li>
-      <li><strong>Condição:</strong> {{ ucfirst($car->condition) }}</li>
+      <li><strong>Marca:</strong> {{ $car->marca }}</li>
+      <li><strong>Modelo:</strong> {{ $car->modelo }}</li>
+      <li><strong>Ano:</strong> {{ $car->ano }}</li>
+      <li><strong>Quilometragem:</strong> {{ $car->quilometragem ?? '—' }} km</li>
+      <li><strong>Condição:</strong> {{ ucfirst($car->condicao) }}</li>
     </ul>
-    <p class="desc">{{ $car->description }}</p>
+    <p class="desc">{{ $car->descricao }}</p>
 
     <div class="actions">
       <a href="#" class="btn big">Agendar test-drive</a>
