@@ -69,14 +69,14 @@ class UsuarioController extends Controller
 
         $remember = $request->boolean('remember');
 
-        if (Auth::attempt($creds, $remember)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('cars.index'));
+        $usuario = Usuario::where('email', $creds['email'])->first();
+        if(!$usuario || !Hash::check($creds['senha'],$usuario->senha)){
+            return back()->withErrors('Acesso negado')->onlyInput('email');
         }
 
-        return back()->withErrors([
-            'email' => 'Credenciais inválidas.',
-        ])->onlyInput('email');
+        Auth::login($usuario, $request->boolean('remember'));
+            $request->session()->regenerate();
+            return redirect()->intended(route('cars.indexs'));
     }
 
 

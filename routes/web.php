@@ -2,7 +2,9 @@
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CarsController;
 
-Route::get('/', fn() => redirect()->route('cars.index'));
+Route::get('/', function() {
+    redirect()->route('cars.index');
+});
 
 Route::resource('cars', CarsController::class);
 
