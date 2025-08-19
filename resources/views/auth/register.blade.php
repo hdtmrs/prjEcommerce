@@ -12,7 +12,7 @@
   </div>
 @endif
 
-<form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="form-card">
+<form method="POST" action="{{ route('step1') }}" enctype="multipart/form-data" class="form-card">
   @csrf
 
   <label>Nome completo

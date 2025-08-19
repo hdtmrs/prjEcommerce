@@ -22,7 +22,7 @@ class Usuario extends Authenticatable
         'imagemPerfil',
         'rua',
         'numero',
-        'neighborhood',
+        'bairro',
         'cidade',
         'estado',
         'cep',
