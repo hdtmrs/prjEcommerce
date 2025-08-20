@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>@yield('title','AutoMercado')</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person" />
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
@@ -12,7 +13,9 @@
       <a class="brand" href="{{ route('cars.index') }}">Auto<span>Mercado</span></a>
       <nav>
         <a href="{{ route('cars.create') }}" class="btn">Anunciar carro</a>
-        <a href="{{ route('login') }}" class="btn">Fazer login</a>
+        <a href="{{ route('login') }}" class="btn">
+          <span class="material-symbols-outlined iconLogin">person</span>
+        </a>
       </nav>
 
     </div>
