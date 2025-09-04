@@ -6,7 +6,15 @@ Route::get('/', function() {
     return redirect()->route('cars.index');
 });
 
-Route::resource('cars', CarsController::class);
+Route::prefix('cars')->name('cars.')->middleware('guest')->controller(CarsController::class)->group(function() {
+    Route::get('show','show')->name('show');
+    Route::get('index','index')->name('index');
+});
+
+Route::prefix('cars')->name('cars.')->middleware('auth')->controller(CarsController::class)->group(function () {
+    Route::post('store', 'store')->name('store');
+    Route::get('create','create')->name('create');
+});
 
 Route::middleware('guest')->group(function(){
     Route::get('register', [UsuarioController::class,'showRegisterForm'])->name('register');
