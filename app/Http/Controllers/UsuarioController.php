@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Cars;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -137,7 +138,9 @@ class UsuarioController extends Controller
 
         $request->session()->forget('cadastro');
 
-        return view('cars.index')->with('success','cadastro realizado com sucesso');
+        $query = Cars::query();
+        $cars = $query->orderBy('created_at','desc')->paginate(9)->withQueryString();
+        return view('cars.index', compact('cars'))->with('success','cadastro realizado com sucesso');
     }
 
 
