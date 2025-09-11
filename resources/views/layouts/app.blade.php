@@ -13,7 +13,7 @@
       <a class="brand" href="{{ route('cars.index') }}">Auto<span>Mercado</span></a>
       <nav>
         <a href="{{ route('cars.create') }}" class="btn">Anunciar carro</a>
-        <a href="{{ route('login') }}" class="btn">
+        <a href="{{ route('user.showperfil') }}" class="btn">
           <span class="material-symbols-outlined iconLogin">person</span>
         </a>
       </nav>

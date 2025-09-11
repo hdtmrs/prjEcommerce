@@ -11,7 +11,7 @@ class Usuario extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = "tbUsuario";
+    protected $table = "tbusuario";
 
     protected $fillable = [
         'nome',

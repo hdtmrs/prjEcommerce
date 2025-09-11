@@ -101,6 +101,6 @@
 
   <button class="btn" type="submit" style="grid-column:span 2">Criar conta</button>
 
-  <p style="grid-column:span 2;color:var(--muted)">Já tem conta? <a href="{{ route('login') }}" style="color:var(--text)">Entrar</a></p>
+  <p style="grid-column:span 2;color:var(--muted)">Já tem conta? <a href="{{ route('showlogin') }}" style="color:var(--text)">Entrar</a></p>
 </form>
 @endsection
